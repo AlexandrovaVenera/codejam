@@ -1,0 +1,139 @@
+body {
+  font-family: "Montserrat", sans-serif;
+  font-size: 10px;
+  background: linear-gradient(120deg, #f6d365, #fda085);
+}
+.wrapper {
+  max-width: 500px;
+  padding: 2rem 2rem 1rem 2rem;
+  margin: 0 auto;
+  text-align: center;
+  user-select: none;
+}
+h1 {
+  font-size: 2.6rem;
+  margin-bottom: 2rem;
+}
+div,
+span {
+  font-size: 1.2rem;
+}
+.move {
+  padding-right: 2rem;
+}
+.timedate {
+  display: inline-block;
+}
+.current {
+  margin-bottom: 10px;
+}
+.puzzle {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  background-color: #685ed6;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+  border-radius: 18px;
+  margin-bottom: 0rem;
+  color: #fff;
+  .item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #000;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 2rem;
+    box-shadow: inset 1px 1px #fda085;
+    transition: transform 0.2s;
+    cursor: pointer;
+    .itemVal {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 84%;
+      height: 84%;
+      margin: 8%;
+      box-shadow: inset 0 0 0 2px #685ed6;
+      border-radius: 15px;
+    }
+  }
+}
+.frame-size {
+  margin-top: 10px;
+}
+.sizes {
+  margin-top: 0.5rem;
+}
+
+.button {
+  // margin-top: 1.4rem;
+  font-size: 1.6rem;
+  border-radius: 5px;
+  margin-right: 5px;
+  padding: 5px;
+  color: #fff;
+  background: #000;
+  cursor: pointer;
+  //transition: all 0.5s ease;
+
+}
+.wrapper-buttons {
+  max-width: 1000px;
+  text-align: center;
+  margin: 0 auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.sizes a {
+  color: #685ed6;
+  // transition: all 0.5s ease;
+  &:active {
+    color: #685ed6;
+  }
+  
+}
+.active {
+  background: #685ed6;
+}
+.audio {
+  display: inline-block;
+  width: 50px;
+  position: relative;
+  top: 15px;
+  height: 48px;
+  cursor: pointer;
+  object-fit: cover;
+  background: url(./../images/music.png) no-repeat;
+}
+.audio-turn-off {
+  display: inline-block;
+  width: 50px;
+  position: relative;
+  top: 15px;
+  height: 48px;
+  cursor: pointer;
+  object-fit: cover;
+  background: url(./../images/music_not.png) no-repeat;
+}
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  .wrapper {
+    padding-bottom: 1rem;
+  }
+  .button {
+    margin-top: 0.5rem;
+  }
+}
+@media (pointer: fine) and (hover: hover) {
+  .sizes a{
+    color: #000;
+  }
+  .button:hover {
+    background: #685ed6;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+}
