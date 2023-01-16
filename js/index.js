@@ -164,7 +164,7 @@ function setNodeStyles(node, x, y) {
 }
 
 /*Изменение позиции при нажатии на элемент*/
-
+let i=0
 puzzle.addEventListener("click", (event) => {
   const blankNumber = Number(frame.dataset.frameId);
   const buttonNode = event.target.closest("button");
@@ -182,6 +182,8 @@ puzzle.addEventListener("click", (event) => {
   ) {
     arrNew = [];
     if (isPlay) {
+      audio.currentTime = 0;
+      audio.load();
       audio.play();
     }else{
       audio.pause()

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="images/icon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="sass/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <title>Gem Puzzle</title>
+  </head>
+  <body>
+    <div class = 'win'>
+
+    </div>
+    <div class="wrapper">
+        <h1>Gem Puzzle</h1>
+        <div class="current">
+        <span class="move">Movies:<span id = 'move'></span> </span>
+        <span class="time">Time:  
+          <span id="timedate">
+              <a id="h">00</a>:<a id="m">00</a>:<a id="s">00</a>
+          </span>
+        </span>
+        </div>
+        
+      <div class="puzzle" id = 'puzzle'> 
+    <button class="item" data-matrix-id="1"><span class="itemVal">1</span></button>
+    <button class="item" data-matrix-id="2"><span class="itemVal">2</span></button>
+    <button class="item" data-matrix-id="3"><span class="itemVal">3</span></button>
+    <button class="item" data-matrix-id="4"><span class="itemVal">4</span></button>
+    <button class="item" data-matrix-id="5"><span class="itemVal">5</span></button>
+    <button class="item" data-matrix-id="6"><span class="itemVal">6</span></button>
+    <button class="item" data-matrix-id="7"><span class="itemVal">7</span></button>
+    <button class="item" data-matrix-id="8"><span class="itemVal">8</span></button>
+    <button class="item" data-matrix-id="9"><span class="itemVal">9</span></button>
+    <button class="item" data-matrix-id="10"><span class="itemVal">10</span></button>
+    <button class="item" data-matrix-id="11"><span class="itemVal">11</span></button>
+    <button class="item" data-matrix-id="12"><span class="itemVal">12</span></button>
+    <button class="item" data-matrix-id="13"><span class="itemVal">13</span></button>
+    <button class="item" data-matrix-id="14"><span class="itemVal">14</span></button>
+    <button class="item" data-matrix-id="15"><span class="itemVal">15</span></button>
+    <button class="item" data-matrix-id="16"><span class="itemVal">16</span></button>
+
+      </div>
+      <div class="frame-size">Frame-size: <span id="current-frame" data-frame-id = "16"></span></div>
+      <div class="sizes">
+          <span>Other size:</span>
+          <span><a href="#" class="frameItem" data-frame-id = "9">3x3</a></span>
+          <span><a href="#" class="frameItem" data-frame-id = "16">4x4</a></span>
+          <span><a href="#" class="frameItem" data-frame-id = "25">5x5</a></span>
+          <span><a href="#" class="frameItem" data-frame-id = "36">6x6</a></span>
+          <span><a href="#" class="frameItem" data-frame-id = "49">7x7</a></span>
+          <span><a href="#" class="frameItem" data-frame-id = "64">8x8</a></span>
+      </div>
+      </div>
+      <div class="wrapper-buttons">
+      <button class="button" id="shuffle">Shuffle and start</button>
+      <button class="button" id="stop">Stop</button>
+      <button class="button">Save</button>
+      <button class="button">Results</button>
+      <div id='audio' class='audio'><audio  ></audio></div>
+    
+    </div>
+    <script src="js/index1.js"></script>
+  </body>
+</html>
