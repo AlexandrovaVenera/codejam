@@ -143,6 +143,8 @@ span {
   background: #000;
   border-radius: 20px;
   color: #fff;
+  width: 25%;
+  height: 25%;
   font-size: 2rem;
   box-shadow: inset 1px 1px #fda085;
   transition: transform 0.2s;
@@ -174,6 +176,17 @@ span {
   padding: 15px;
   color: #fff;
   background: #000;
+  cursor: pointer;
+}
+
+.win-button {
+  font-size: 1.2rem;
+  border-radius: 5px;
+  margin-top: 30px;
+  float: right;
+  padding: 15px;
+  color: #fff;
+  background: #685ed6;
   cursor: pointer;
 }
 
@@ -243,7 +256,7 @@ span {
 }
 .win {
   z-index: 50;
-  top: 33%;
+  top: 25%;
   left: 33%;
   max-width: 33%;
   max-height: 33%;
@@ -258,7 +271,7 @@ span {
   font-weight: 600;
   line-height: 20px;
   opacity: 0;
-  visibility: hidden;
+  visibility: visible;
 }
 
 .popup {

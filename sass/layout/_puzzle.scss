@@ -43,6 +43,8 @@ span {
     background: #000;
     border-radius: 20px;
     color: #fff;
+    width: calc(100%/4); //поменять когда переделаю функцию
+    height: calc(100%/4);//поменять когда переделаю функцию
     font-size: 2rem;
     box-shadow: inset 1px 1px #fda085;
     transition: transform 0.2s;
@@ -74,6 +76,19 @@ span {
   padding: 15px;
   color: #fff;
   background: #000;
+  cursor: pointer;
+  //transition: all 0.5s ease;
+
+}
+.win-button {
+  // margin-top: 1.4rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  margin-top: 30px;
+  float: right;
+  padding: 15px;
+  color: #fff;
+  background: #685ed6;
   cursor: pointer;
   //transition: all 0.5s ease;
 

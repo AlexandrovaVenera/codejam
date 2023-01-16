@@ -1,6 +1,6 @@
 .win {
   z-index: 50;
-  top: 33%;
+  top: 25%;
   left: 33%;
   max-width: 33%;
   max-height: 33%;
@@ -15,7 +15,7 @@
   font-weight: 600;
   line-height: 20px;
   opacity: 0;
-  visibility: hidden;
+  visibility: visible;
   //font-size: 2rem;
 }
 .popup {
