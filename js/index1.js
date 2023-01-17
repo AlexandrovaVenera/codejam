@@ -5,15 +5,35 @@ let frame = document.getElementById("current-frame");
 let itemNodes = Array.from(document.querySelectorAll('.item'))
 frame.textContent = "4x4";
 let moveCount = 0;
+let blockedCoords= null
 
 
-
+const maxShuffleCount = 50;
  
-
-
 /*Количество пятнашек */
 let countItems = 16;
 
+makeArray(countItems)
+
+/* */
+function makeArray(countItems) {
+  for (let i = 0; i < countItems; i++){
+    let buttonCreate = document.createElement("button");
+    let spanCreate = document.createElement("span");
+    let count = Number(document.getElementById("current-frame").innerText[0]);
+    buttonCreate.classList.add("item");
+    buttonCreate.dataset.matrixId = i + 1;
+    spanCreate.classList.add("itemVal");
+    spanCreate.innerText = i + 1;
+    containerNode.appendChild(buttonCreate);
+    buttonCreate.appendChild(spanCreate);
+    //buttonCreate.style.width = `calc(100%/${count})`;
+    //buttonCreate.style.height = `calc(100%/${count})`;
+    if (i - 1 === countItems) {
+      buttonCreate.style.display = "none";
+    }
+  }
+}
 
 /*Включение музыки по умолчанию */
 let isPlay = true
@@ -170,40 +190,49 @@ function goBack(){
 }
 
 /*--------------*/
-/** */
-// function shuffle(){
-//     const shuffledArray = shuffleArray(matrix.flat());
-//     console.log(shuffledArray)
-//     matrix = getMatrix(shuffledArray)
-//     setPositionItems(matrix);
-  
-// }
+
+let timer;
 
 function shuffle(){
-randomSwap(matrix)
-setPositionItems(matrix)
+clearInterval(timer);
+let shuffleCount = 0;
+
+  timer = setInterval(()=>{
+    randomSwap(matrix)
+    setPositionItems(matrix)
+    shuffleCount +=1;
+    if(shuffleCount >= maxShuffleCount){
+      shuffleCount = 0
+      clearInterval(timer);
+    }
+  },50)
+
 }
 
 function randomSwap(matrix){
   const blankCoords = findCoordinatesByNumber(blankNumber, matrix);
   const validCoords = findValidCoords({
     blankCoords,
-    matrix
+    matrix,
+    blockedCoords
   })
-  console.log( validCoords)
+
   const swapCoords = validCoords[Math.floor(Math.random()* validCoords.length)];
   swap(blankCoords, swapCoords,matrix)
+  blockedCoords = blankCoords;
 }
 
 
-function findValidCoords({blankCoords,matrix} ){
+function findValidCoords({blankCoords,matrix, blockedCoords}){
   const validCoords = [];
   for (let y = 0; y < matrix.length; y++) {
     for (let x = 0; x < matrix[y].length; x++) {
       if(isValidForSwap({x,y}, blankCoords)){
+        if(!blockedCoords || !(blockedCoords.x===x && blockedCoords.y===y)){
       validCoords.push({x,y})
+      }
       }
     }
   }
-  return
+  return validCoords;
 }
