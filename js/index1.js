@@ -48,10 +48,9 @@ for (let i = 0; i < framesSize.length; i++) {
     itemNodes = Array.from(containerNode.querySelectorAll(".item"));
     itemNodes[countItems - 1].style.display = "none";
     matrix = getMatrix(itemNodes.map((item) => Number(item.dataset.matrixId)));
-    shuffledArray = shuffleArray(matrix.flat());
-    matrix = getMatrix(shuffledArray);
+    //shuffledArray = shuffleArray(matrix.flat());
+    //matrix = getMatrix(shuffledArray);
     setPositionItems(matrix);
-    console.log(matrix)
   })
 }
 /*-----------------*/
