@@ -2,46 +2,67 @@
 let containerNode = document.getElementById("puzzle");
 let framesSize = Array.from(document.querySelectorAll(".frameItem"));
 let frame = document.getElementById("current-frame");
-let itemNodes = Array.from(document.querySelectorAll('.item'))
+const move = document.getElementById("move");
+let itemNodes 
+let myTimeout;
+let compareDate = new Date();
+let seconds;
+let minutes;
+let hours;
+let stop = false;
+
+
 frame.textContent = "4x4";
 let moveCount = 0;
-let blockedCoords= null
+move.textContent = moveCount;
+let blockedCoords= null;
 
 
 const maxShuffleCount = 50;
  
+
+/* Подключение музыки*/
+
+let audioBtn = document.getElementById("audio");
+
+audioBtn.addEventListener("click", () => {
+  if(isPlay){
+    isPlay = false;
+    audioBtn.classList.add("audio-turn-off")
+  }else{
+    isPlay = true;
+    audioBtn.classList.remove("audio-turn-off")
+  }
+});
+/*-----------------*/
 /*Количество пятнашек */
-let countItems = 16;
+let countItems = Number(frame.dataset.frameId)**2;
 
 makeArray(countItems)
 
-/* */
+/*Создание html массива*/
 function makeArray(countItems) {
   for (let i = 0; i < countItems; i++){
     let buttonCreate = document.createElement("button");
     let spanCreate = document.createElement("span");
-    let count = Number(document.getElementById("current-frame").innerText[0]);
     buttonCreate.classList.add("item");
     buttonCreate.dataset.matrixId = i + 1;
     spanCreate.classList.add("itemVal");
     spanCreate.innerText = i + 1;
     containerNode.appendChild(buttonCreate);
     buttonCreate.appendChild(spanCreate);
-    //buttonCreate.style.width = `calc(100%/${count})`;
-    //buttonCreate.style.height = `calc(100%/${count})`;
-    if (i - 1 === countItems) {
-      buttonCreate.style.display = "none";
-    }
+    itemNodes = Array.from(document.querySelectorAll('.item'))
+    buttonCreate.style.width = `calc(100%/${frame.dataset.frameId})`;
+    buttonCreate.style.height = `calc(100%/${frame.dataset.frameId})`;
+
   }
 }
 
 /*Включение музыки по умолчанию */
-let isPlay = true
-function playAudio(){
-  const audio = new Audio();
-  audio.src = './media/music.mp3'
-}
-playAudio()
+let isPlay = true;
+const audio = new Audio('./media/music.mp3');
+
+
 
 /*Позиционирование */
 itemNodes[countItems-1].style.display = 'none'
@@ -56,7 +77,7 @@ document.getElementById("shuffle").addEventListener('click', shuffle)
 /*-------------------------- */
 
 /*Позиция по клику*/
-const blankNumber = 16 //пустой элемент
+const blankNumber = countItems //пустой элемент
 containerNode.addEventListener('click', (event)=>{
   const buttonNode = event.target.closest('button');
   if(!buttonNode){
@@ -67,15 +88,39 @@ containerNode.addEventListener('click', (event)=>{
   const blankCoords = findCoordinatesByNumber(blankNumber, matrix);
   const isValid = isValidForSwap(buttonCoords, blankCoords);
   if (isValid) {
+    
+    if (isPlay) {
+      audio.currentTime = 0;
+      audio.load();
+      audio.play();
+    }else{
+      audio.pause()
+    }
+    moveCount+=1;
+      move.textContent = moveCount;
       swap(blankCoords, buttonCoords,matrix)
       setPositionItems(matrix)
 }})
 
+document.getElementById("stop").addEventListener("click", () => {
+  document.getElementById("stop").classList.toggle("active");
+  if (document.getElementById("stop").classList.contains("active")) {
+    stop = true;
+  } else {
+    stop = false;
+    compareDate = new Date();
+    clock()
+  }
+});
 
 /*Helpers */
 /*Создание матрицы*/
 function getMatrix(arr){
-  const matrix = [[],[],[],[]]
+  //const matrix = [[],[],[],[]]
+  let matrix=[]
+  for(let i=0;i<frame.dataset.frameId;i++){
+    matrix.push([])
+  }
   let y = 0;
   let x = 0;
 
@@ -91,7 +136,13 @@ function getMatrix(arr){
 }
 
 /*-------------------*/
-
+/*Удаление массива*/
+function deleteArray(arr) {
+  for (let i = 0; i < itemNodes.length; i++) {
+    itemNodes[i].remove();
+  }
+}
+/*-----------------*/
 function setPositionItems(matrix){
   for(let y=0; y<matrix.length; y++){
     for(let x=0;x<matrix[y].length; x++){
@@ -148,13 +199,15 @@ function swap(coords1, coords2, matrix, moveCount) {
   }
 }
 /*-----------------------*/
+let flatMatrix
 /*Проверка массива на выйгрыш */
 const winFlatArray = new Array(16).fill(0).map((el,i)=>el=i+1)
-console.log(winFlatArray)
 function isWon(matrix){
-  const flatMatrix = matrix.flat();
+  flatMatrix = matrix.flat();
+  console.log(flatMatrix)
+
   for(let i=0; i<winFlatArray.length; i++){
-    if(flatMatrix[i]!==winFlatArray[i]){
+    if(flatMatrix[i]!== winFlatArray[i]){
       return false
     }
   }
@@ -167,18 +220,18 @@ let win = document.querySelector(".win");
 function addWonClass(){
   win.classList.add("popup");
   win.innerHTML=`
-  <div class="win-container">Hooray! You solved the puzzle in:</div>
+  <div class="win-container">Hooray! You solved the puzzle in: </div>
   <button class="win-button">OK</button>
   `
   const containerWin = document.querySelector(".win-container")
-  // containerWin.append(("0" + hours).slice(-2));
-  // containerWin.append(":");
-  // containerWin.append(("0" + minutes).slice(-2));
-  // containerWin.append(":");
-  // containerWin.append(("0" + seconds).slice(-2));
-  // containerWin.append(" and ");
-  // containerWin.append(moveCount);
-  // containerWin.append(" moves");
+  containerWin.append(("0" + hours).slice(-2));
+  containerWin.append(":");
+  containerWin.append(("0" + minutes).slice(-2));
+  containerWin.append(":");
+  containerWin.append(("0" + seconds).slice(-2));
+  containerWin.append(" and ");
+   containerWin.append(moveCount);
+   containerWin.append(" moves");
 
   const winBtn = document.querySelector('.win-button')
   winBtn.addEventListener('click', goBack)
@@ -187,28 +240,44 @@ function addWonClass(){
 /*Вернуться обратно в игру */
 function goBack(){
   win.classList.remove("popup");
+  moveCount = 0;
+  move.textContent = moveCount;
+  
 }
 
 /*--------------*/
 
+/*Смена размера пятнашек*/
+for (let i = 0; i < framesSize.length; i++) {
+  framesSize[i].addEventListener("click", (event) => {
+  
+  
+  })
+}
+/*Перемешивание элементов массива*/
 let timer;
-
 function shuffle(){
-clearInterval(timer);
-let shuffleCount = 0;
+  moveCount = 0;
+  
+  move.textContent = moveCount;
+  clearInterval(timer);
+  let shuffleCount = 0;
+  diffStop = 0
 
+  compareDate = new Date();
   timer = setInterval(()=>{
     randomSwap(matrix)
     setPositionItems(matrix)
     shuffleCount +=1;
+    //compareDate = new Date()
     if(shuffleCount >= maxShuffleCount){
       shuffleCount = 0
       clearInterval(timer);
     }
-  },50)
-
+  },0)
+    
 }
-
+/*-----------------------*/
 function randomSwap(matrix){
   const blankCoords = findCoordinatesByNumber(blankNumber, matrix);
   const validCoords = findValidCoords({
@@ -236,3 +305,31 @@ function findValidCoords({blankCoords,matrix, blockedCoords}){
   }
   return validCoords;
 }
+let diff = 0;
+let diffStop = 0
+/*Часы*/
+function clock() {
+
+  if (stop === true || win.classList.contains("popup")) {
+    diffStop = diff;
+  } else if (stop === false) {
+
+    now = new Date();
+    diff = diffStop + now.getTime() - compareDate.getTime();
+    setTimeout(clock, 1000, diff);
+    seconds = Math.floor(diff / 1000);
+    minutes = Math.floor(seconds / 60);
+    hours = Math.floor(minutes / 60);
+
+    hours %= 24;
+    minutes %= 60;
+    seconds %= 60;
+
+    document.getElementById("h").innerHTML = ("0" + hours).slice(-2);
+    document.getElementById("m").innerHTML = ("0" + minutes).slice(-2);
+    document.getElementById("s").innerHTML = ("0" + seconds).slice(-2);
+  }
+}
+clock()
+
+/*------------------------------*/

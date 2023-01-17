@@ -15,6 +15,40 @@
     <title>Gem Puzzle</title>
   </head>
   <body>
+    <div class = 'win'>
+    </div>
+    <div class="wrapper">
+        <h1>Gem Puzzle</h1>
+        <div class="current">
+        <span class="move">Movies:<span id = 'move'></span></span>
+        <span class="time">Time:  
+          <span id="timedate">
+              <a id="h">00</a>:<a id="m">00</a>:<a id="s">00</a>
+          </span>
+        </span>
+        </div>
+        
+      <div class="puzzle" id = 'puzzle'> 
+      </div>
+      <div class="frame-size">Frame-size: <span id="current-frame" data-frame-id = "4"></span></div>
+      <div class="sizes">
+          <span>Other size:</span>
+          <span><a href="#" class="frameItem" data-frame-id = "3">3x3</a></span>
+          <span><a href="#" class="frameItem" data-frame-id = "4">4x4</a></span>
+          <span><a href="#" class="frameItem" data-frame-id = "5">5x5</a></span>
+          <span><a href="#" class="frameItem" data-frame-id = "6">6x6</a></span>
+          <span><a href="#" class="frameItem" data-frame-id = "7">7x7</a></span>
+          <span><a href="#" class="frameItem" data-frame-id = "8">8x8</a></span>
+      </div>
+      </div>
+      <div class="wrapper-buttons">
+      <button class="button" id="shuffle">Shuffle and start</button>
+      <button class="button" id="stop">Stop</button>
+      <button class="button">Save</button>
+      <button class="button">Results</button>
+      <div id='audio' class='audio'><audio  ></audio></div>
+    
+    </div>
     <script src="js/index1.js"></script>
   </body>
 </html>

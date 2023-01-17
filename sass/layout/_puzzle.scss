@@ -21,6 +21,13 @@ span {
 .move {
   padding-right: 2rem;
 }
+#move{
+  padding-left: 2px;
+}
+#timedate{
+  display: inline-block;
+  width: 90px;
+}
 .timedate {
   display: inline-block;
 }
@@ -43,8 +50,6 @@ span {
     background: #000;
     border-radius: 20px;
     color: #fff;
-    width: calc(100%/4); //поменять когда переделаю функцию
-    height: calc(100%/4);//поменять когда переделаю функцию
     font-size: 2rem;
     box-shadow: inset 1px 1px #fda085;
     transition: transform 0.2s;
