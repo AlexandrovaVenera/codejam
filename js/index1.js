@@ -35,6 +35,25 @@ audioBtn.addEventListener("click", () => {
     audioBtn.classList.remove("audio-turn-off")
   }
 });
+/*Изменение количества пятнашек */
+for (let i = 0; i < framesSize.length; i++) {
+  framesSize[i].addEventListener("click", (event) => {
+    moveCount = 0;
+    move.textContent = moveCount;
+    frame.textContent = framesSize[i].textContent;
+    frame.dataset.frameId = framesSize[i].dataset.frameId;
+    countItems = Number(frame.dataset.frameId)**2;
+    deleteArray(itemNodes);
+    makeArray(countItems);
+    itemNodes = Array.from(containerNode.querySelectorAll(".item"));
+    itemNodes[countItems - 1].style.display = "none";
+    matrix = getMatrix(itemNodes.map((item) => Number(item.dataset.matrixId)));
+    shuffledArray = shuffleArray(matrix.flat());
+    matrix = getMatrix(shuffledArray);
+    setPositionItems(matrix);
+    console.log(matrix)
+  })
+}
 /*-----------------*/
 /*Количество пятнашек */
 let countItems = Number(frame.dataset.frameId)**2;
@@ -126,7 +145,7 @@ function getMatrix(arr){
   let x = 0;
 
   for(let i=0; i<arr.length; i++){
-    if(x>=4){
+    if(x>=frame.dataset.frameId){
       y++;
       x=0;
     }
@@ -251,13 +270,7 @@ function goBack(){
 
 /*--------------*/
 
-/*Смена размера пятнашек*/
-for (let i = 0; i < framesSize.length; i++) {
-  framesSize[i].addEventListener("click", (event) => {
-  
-  
-  })
-}
+
 /*Перемешивание элементов массива*/
 let timer;
 function shuffle(){
