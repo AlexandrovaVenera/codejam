@@ -3,6 +3,7 @@ let containerNode = document.getElementById("puzzle");
 let framesSize = Array.from(document.querySelectorAll(".frameItem"));
 let frame = document.getElementById("current-frame");
 const move = document.getElementById("move");
+
 let itemNodes 
 let myTimeout;
 let compareDate = new Date();
@@ -216,9 +217,12 @@ return true
 /*------------------------*/
 
 /*В случае выйгрыша*/
-let win = document.querySelector(".win");
+let winBlock = document.querySelector(".win-block");
 function addWonClass(){
-  win.classList.add("popup");
+  winBlock.classList.add("popup");
+  let win = document.createElement('div')
+  win.classList.add('win')
+  winBlock.append(win)
   win.innerHTML=`
   <div class="win-container">Hooray! You solved the puzzle in: </div>
   <button class="win-button">OK</button>
@@ -239,7 +243,7 @@ function addWonClass(){
 
 /*Вернуться обратно в игру */
 function goBack(){
-  win.classList.remove("popup");
+  winBlock.classList.remove("popup");
   moveCount = 0;
   move.textContent = moveCount;
   
@@ -310,7 +314,7 @@ let diffStop = 0
 /*Часы*/
 function clock() {
 
-  if (stop === true || win.classList.contains("popup")) {
+  if (stop === true || winBlock.classList.contains("popup")) {
     diffStop = diff;
   } else if (stop === false) {
 

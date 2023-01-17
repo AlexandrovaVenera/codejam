@@ -1,11 +1,22 @@
-.win {
+.win-block{
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
   z-index: 50;
-  top: 25%;
+  display: flex;
+  justify-content: center;
+
+}
+
+.win {
+  
+  margin-top: 9%;
   left: 33%;
-  max-width: 33%;
+  max-width: 35%;
   max-height: 33%;
   height: 100%;
-  position: fixed;
   padding: 80px 20px;
   background-color: rgba(0, 0, 0, 0.8);
   color: #fff;
@@ -14,8 +25,7 @@
   text-align: center;
   font-weight: 600;
   line-height: 30px;
-  opacity: 0;
-  visibility: hidden;
+
   //font-size: 2rem;
 }
 .popup {
