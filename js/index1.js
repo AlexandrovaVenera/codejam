@@ -51,6 +51,7 @@ for (let i = 0; i < framesSize.length; i++) {
     //shuffledArray = shuffleArray(matrix.flat());
     //matrix = getMatrix(shuffledArray);
     setPositionItems(matrix);
+    console.log(matrix)
   })
 }
 /*-----------------*/
@@ -82,7 +83,6 @@ let isPlay = true;
 const audio = new Audio('./media/music.mp3');
 
 
-
 /*Позиционирование */
 itemNodes[countItems-1].style.display = 'none'
 let matrix = getMatrix(itemNodes.map((item)=>Number(item.dataset.matrixId))
@@ -96,15 +96,18 @@ document.getElementById("shuffle").addEventListener('click', shuffle)
 /*-------------------------- */
 
 /*Позиция по клику*/
-const blankNumber = countItems //пустой элемент
+
 containerNode.addEventListener('click', (event)=>{
   const buttonNode = event.target.closest('button');
   if(!buttonNode){
     return
   }
+  const blankNumber = countItems //пустой элемент
+  console.log(blankNumber)
   const buttonNumber = Number(buttonNode.dataset.matrixId)
   const buttonCoords = findCoordinatesByNumber(buttonNumber, matrix)
   const blankCoords = findCoordinatesByNumber(blankNumber, matrix);
+  console.log(blankCoords)
   const isValid = isValidForSwap(buttonCoords, blankCoords);
   if (isValid) {
     
