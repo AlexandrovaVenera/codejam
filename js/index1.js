@@ -225,10 +225,12 @@ function swap(coords1, coords2, matrix, moveCount) {
 /*-----------------------*/
 let flatMatrix
 /*Проверка массива на выйгрыш */
-const winFlatArray = new Array(16).fill(0).map((el,i)=>el=i+1)
+
 function isWon(matrix){
+  let winFlatArray = new Array(countItems).fill(0).map((el,i)=>el=i+1)
   flatMatrix = matrix.flat();
   console.log(flatMatrix)
+  console.log(winFlatArray)
 
   for(let i=0; i<winFlatArray.length; i++){
     if(flatMatrix[i]!== winFlatArray[i]){
@@ -243,23 +245,8 @@ return true
 let winBlock = document.querySelector(".win-block");
 function addWonClass(){
   winBlock.classList.add("popup");
-  let win = document.createElement('div')
-  win.classList.add('win')
-  winBlock.append(win)
-  win.innerHTML=`
-  <div class="win-container">Hooray! You solved the puzzle in: </div>
-  <button class="win-button">OK</button>
-  `
-  const containerWin = document.querySelector(".win-container")
-  containerWin.append(("0" + hours).slice(-2));
-  containerWin.append(":");
-  containerWin.append(("0" + minutes).slice(-2));
-  containerWin.append(":");
-  containerWin.append(("0" + seconds).slice(-2));
-  containerWin.append(" and ");
-   containerWin.append(moveCount);
-   containerWin.append(" moves");
-
+  document.querySelector(".time").textContent = `${("0" + hours).slice(-2)}:${("0" + minutes).slice(-2)}:${("0" + seconds).slice(-2)}`
+  document.querySelector(".move-count").textContent = `${moveCount} moves`
   const winBtn = document.querySelector('.win-button')
   winBtn.addEventListener('click', goBack)
 }
