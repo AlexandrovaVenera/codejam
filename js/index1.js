@@ -48,6 +48,8 @@ for (let i = 0; i < framesSize.length; i++) {
     itemNodes = Array.from(containerNode.querySelectorAll(".item"));
     itemNodes[countItems - 1].style.display = "none";
     matrix = getMatrix(itemNodes.map((item) => Number(item.dataset.matrixId)));
+    blankNumber = countItems 
+
     //shuffledArray = shuffleArray(matrix.flat());
     //matrix = getMatrix(shuffledArray);
     setPositionItems(matrix);
@@ -74,7 +76,7 @@ function makeArray(countItems) {
     itemNodes = Array.from(document.querySelectorAll('.item'))
     buttonCreate.style.width = `calc(100%/${frame.dataset.frameId})`;
     buttonCreate.style.height = `calc(100%/${frame.dataset.frameId})`;
-
+    
   }
 }
 
@@ -96,13 +98,13 @@ document.getElementById("shuffle").addEventListener('click', shuffle)
 /*-------------------------- */
 
 /*Позиция по клику*/
-
+let blankNumber = countItems 
 containerNode.addEventListener('click', (event)=>{
   const buttonNode = event.target.closest('button');
   if(!buttonNode){
     return
   }
-  const blankNumber = countItems //пустой элемент
+  //пустой элемент
   console.log(blankNumber)
   const buttonNumber = Number(buttonNode.dataset.matrixId)
   const buttonCoords = findCoordinatesByNumber(buttonNumber, matrix)
